@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hydroid</string>
+    <string name="checkout_page">Checkout Page</string>
+    <string name="pickup_restaurant_address">PickUp Address</string>
+    <string name="address">Navi Mumbai</string>
+    <string name="order_list">Order List</string>
+    <string name="doted_line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</string>
+    <string name="detail">Detail</string>
+    <string name="quantity">Quantity</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="gst_2_5">GST(2.5%)</string>
+    <string name="total">Total</string>
+    <string name="to_pay">To pay</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="cash_on_delivery">cash on delivery</string>
+    <string name="place_order">Place Order</string>
+    <string name="creator">Created By Martian</string>
+    <string name="top_dishes">Top Vegetables</string>
+    <string name="category">Categories</string>
+    <string name="add">Add</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="confirmation_ques">Do you want to Place Order?</string>
+    <string name="order_placed_message">Yay! Your Order Placed Successfully😍🎉🎉🎉</string>
+    <string name="pickup">Pickup</string>
+    <string name="delivery">Delivery</string>
+    <string name="restaurant_name">Shubham Da Dhaba</string>
+<!--    <string name="lang">हिन्दी</string>-->
+    <string name="open_timing">Opens at 10AM</string>
+<!--    <string name="confirmation_ques_lang">Do you want to change your language to Hindi?</string>-->
+
+
+    <string-array name="dish_names">
+        <item>basiel</item>
+        <item>beet_leaves</item>
+        <item>mixed_baby_leaves</item>
+        <item>kale</item>
+        <item>lettuce</item>
+        <item>broccoli</item>
+        <item>cabbage_green</item>
+        <item>red_cabbage</item>
+        <item>potato</item>
+        <item>sweet_potato</item>
+    </string-array>
+
+    <string-array name="category_names">
+        <item>Leafy</item>
+        <item>Cruciferous</item>
+        <item>Root</item>
+    </string-array>
+
+    <string-array name="top_dish_names">
+        <item>Lettus</item>
+        <item>Basil</item>
+        <item>Kale</item>
+    </string-array>
+
+    <string-array name="top_category_names">
+        <item>Leafy</item>
+        <item>Cruciferous</item>
+        <item>Root</item>
+    </string-array>
+</resources>

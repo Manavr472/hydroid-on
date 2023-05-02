@@ -1,0 +1,224 @@
+package com.food.ordering.app;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.food.ordering.app.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class Splashscreen extends AppCompatActivity {
+
+
+    Animation topAnim, bottomAnim, frombottomAnim, leftAnim;
+    ImageView logo, appName, backgroundImage, logo1;
+    ConstraintLayout splashData, splashdata2, main;
+
+    Resources res;
+
+    private int[] category_id = {1, 2, 3};
+    private int[] cat_image = {R.drawable.basiel, R.drawable.broccoli, R.drawable.potato};
+    private String[] cat_name;
+
+    List<CategoryModel> categoryModelList = new ArrayList<>();
+    RecyclerView recyclerViewCircular, recyclerView;
+    LinearLayoutManager layoutManagerStoreFilter;
+
+
+    //top dishes
+    private int[] image = {R.drawable.lettuce, R.drawable.basiel, R.drawable.kale};
+    private double[] rating = {3.5, 4, 4.3};
+    private String[] top_dish_name;
+    private int[] price = {120, 225, 175};
+    private int[] id = {5, 1, 4};
+    private String[] top_category_name;
+    private List<DishModel> topDishModelList = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //To Hide Status Bar getWindow ().setFlags ( WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_splashscreen);
+        res = getResources();
+        cat_name = res.getStringArray(R.array.category_names);
+        top_dish_name = res.getStringArray(R.array.top_dish_names);
+        top_category_name = res.getStringArray(R.array.top_category_names);
+
+
+        recyclerViewCircular = findViewById(R.id.category_recycler);
+        recyclerViewCircular.setPadding(80, 0, 80, 0);
+
+
+//        recyclerViewCircular.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        prepareTheList();
+//
+//        catAdapter adapter= new catAdapter(categoryModelList,this);
+//        recyclerViewCircular.setAdapter(adapter);
+
+
+        layoutManagerStoreFilter = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewCircular.setLayoutManager(layoutManagerStoreFilter);
+
+
+        prepareTheList();
+        categoryAdapter adapter = new categoryAdapter(categoryModelList, this);
+
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerViewCircular);
+
+        recyclerViewCircular.setAdapter(adapter);
+
+        layoutManagerStoreFilter.scrollToPosition(((Integer.MAX_VALUE / 2) - ((Integer.MAX_VALUE / 2) % categoryModelList.size())));
+
+
+        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+        frombottomAnim = AnimationUtils.loadAnimation(this, R.anim.frombottom);
+        leftAnim = AnimationUtils.loadAnimation(this, R.anim.left_right);
+
+        main = findViewById(R.id.main);
+        splashData = findViewById(R.id.splashData);
+        splashdata2 = findViewById(R.id.splashData2);
+
+        logo = findViewById(R.id.logo);
+        appName = findViewById(R.id.appname);
+        logo1 = findViewById(R.id.logo);
+        backgroundImage = findViewById(R.id.background_image);
+
+        logo.setAnimation(leftAnim);
+        appName.setAnimation(bottomAnim);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                backgroundImage.animate().translationY(-1330).setDuration(800).setStartDelay(300);
+                splashData.animate().translationY(-1700).setDuration(800).setStartDelay(300);
+                splashdata2.setVisibility(View.VISIBLE);
+                splashdata2.startAnimation(frombottomAnim);
+
+            }
+        }, 2000);
+
+
+        //language change
+//        TextView lang_spin = findViewById(R.id.lang_spinner);
+//        lang_spin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new AlertDialog.Builder(Splashscreen.this)
+//                        .setTitle(R.string.confirmation)
+//                        .setMessage(R.string.confirmation_ques_lang)
+//                        .setIcon(android.R.drawable.ic_dialog_alert)
+//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//
+//                            public void onClick(DialogInterface dialog, int whichButton) {
+//                                if (lang_spin.getText().equals("English")) {
+//                                    Locale locale = new Locale("en");
+//                                    Locale.setDefault(locale);
+//                                    Configuration config = new Configuration();
+//                                    config.locale = locale;
+//                                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+//                                    lang_spin.setText("हिन्दी");
+//                                    Intent intent = getIntent();
+//                                    finish();
+//                                    startActivity(intent);
+//                                } else {
+//                                    Locale locale = new Locale("hi");
+//                                    Locale.setDefault(locale);
+//                                    Configuration config = new Configuration();
+//                                    config.locale = locale;
+//                                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+//                                    lang_spin.setText("English");
+//                                    Intent intent = getIntent();
+//                                    finish();
+//                                    startActivity(intent);
+//                                }
+//
+//
+//                            }
+//                        })
+//                        .setNegativeButton(android.R.string.no, null).show();
+//            }
+//        });
+
+        //cart button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.toCart);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), cart.class);
+                startActivity(i);
+            }
+        });
+
+
+        main.setBackgroundColor(getResources().getColor(R.color.skyBlue));
+
+
+    }
+
+    private void prepareTheList() {
+        int count = 0;
+        for (String catName : cat_name) {
+            CategoryModel categoryModel = new CategoryModel(cat_image[count], catName, category_id[count]);
+            categoryModelList.add(categoryModel);
+            count++;
+        }
+    }
+
+    private void prepareTheTopDishList() {
+        int count = 0;
+        for (String dishName : top_dish_name) {
+            DishModel dishModel = new DishModel(image[count], rating[count], price[count], dishName, id[count], top_category_name[count]);
+            topDishModelList.add(dishModel);
+            count++;
+        }
+    }
+
+
+//    public void openLinkedin(View view) {
+//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/keshrishubham/"));
+//        startActivity(browserIntent);
+//    }
+//
+//    public void openGithub(View view) {
+//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/iamshubhamkeshri"));
+//        startActivity(browserIntent);
+//    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Top Dishes
+
+        topDishModelList.clear();
+        recyclerView = findViewById(R.id.topDishes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        prepareTheTopDishList();
+        topDishAdapter adapter2 = new topDishAdapter(topDishModelList);
+        recyclerView.setAdapter(adapter2);
+
+    }
+}
